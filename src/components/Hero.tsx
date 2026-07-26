@@ -79,10 +79,10 @@ export default function Hero({ profile, badges }: { profile: Profile; badges: Pi
         <div className="lg:col-span-7 space-y-stack-lg">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold tracking-wide">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            Available for new projects
+            Open to full-time opportunities
           </div>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight">
-            {profile?.tagline || "Building Scalable Web & Mobile Solutions."}
+            {profile?.tagline || `Hi, I'm ${profile?.name || "there"}.`}
           </h1>
           {profile?.title && (
             <p className="text-xl md:text-2xl font-semibold text-primary">{profile.title}</p>

@@ -20,7 +20,7 @@ export default function About({ profile }: { profile: Profile }) {
               </div>
               <div className="p-stack-md bg-surface rounded-xl border border-outline-variant/30">
                 <h4 className="text-primary text-2xl font-bold">{profile?.stat_satisfaction}</h4>
-                <p className="text-sm font-semibold">Client Satisfaction</p>
+                <p className="text-sm font-semibold">Years of Experience</p>
               </div>
             </div>
           </div>
