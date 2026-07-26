@@ -3,22 +3,34 @@ import CursorGlow from "@/components/CursorGlow";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import ExperienceSection from "@/components/ExperienceSection";
+import EducationSection from "@/components/EducationSection";
+import CertificationsSection from "@/components/CertificationsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactCta from "@/components/ContactCta";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { getProfile, getSocialLinks, getSkillGroups, getExperience, getProjects } from "@/lib/data";
+import {
+  getProfile,
+  getSocialLinks,
+  getSkillGroups,
+  getExperience,
+  getProjects,
+  getEducation,
+  getCertifications,
+} from "@/lib/data";
 
 export const revalidate = 0;
 
 export default async function Home() {
-  const [profile, socialLinks, skillGroups, experience, projects] = await Promise.all([
+  const [profile, socialLinks, skillGroups, experience, projects, education, certifications] = await Promise.all([
     getProfile(),
     getSocialLinks(),
     getSkillGroups(),
     getExperience(),
     getProjects(),
+    getEducation(),
+    getCertifications(),
   ]);
 
   return (
@@ -38,6 +50,8 @@ export default async function Home() {
         </section>
         <About profile={profile} />
         <ExperienceSection experience={experience} />
+        <EducationSection education={education} />
+        <CertificationsSection certifications={certifications} />
         <ProjectsSection projects={projects} />
         <SkillsSection groups={skillGroups} />
         <ContactCta profile={profile} />

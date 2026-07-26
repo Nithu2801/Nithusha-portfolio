@@ -1,13 +1,23 @@
 import Link from "next/link";
-import { getProfile, getSocialLinks, getSkillGroups, getExperience, getProjects } from "@/lib/data";
+import {
+  getProfile,
+  getSocialLinks,
+  getSkillGroups,
+  getExperience,
+  getProjects,
+  getEducation,
+  getCertifications,
+} from "@/lib/data";
 
 export default async function AdminOverview() {
-  const [profile, socialLinks, skillGroups, experience, projects] = await Promise.all([
+  const [profile, socialLinks, skillGroups, experience, projects, education, certifications] = await Promise.all([
     getProfile(),
     getSocialLinks(),
     getSkillGroups(),
     getExperience(),
     getProjects(),
+    getEducation(),
+    getCertifications(),
   ]);
 
   const cards = [
@@ -15,6 +25,8 @@ export default async function AdminOverview() {
     { label: "Social links", value: socialLinks.length, href: "/admin/social-links", icon: "share" },
     { label: "Skill groups", value: skillGroups.length, href: "/admin/skills", icon: "code_blocks" },
     { label: "Experience entries", value: experience.length, href: "/admin/experience", icon: "work_history" },
+    { label: "Education entries", value: education.length, href: "/admin/education", icon: "school" },
+    { label: "Certifications", value: certifications.length, href: "/admin/certifications", icon: "workspace_premium" },
     { label: "Projects", value: projects.length, href: "/admin/projects", icon: "dashboard_customize" },
   ];
 

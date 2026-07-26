@@ -1,47 +1,39 @@
+import Link from "next/link";
 import type { Project } from "@/lib/types";
 
 function ProjectCard({ project }: { project: Project }) {
-  const inner = (
-    <div className="group overflow-hidden rounded-3xl border border-outline-variant/30 soft-shadow hover-lift bg-white h-full flex flex-col">
-      <div
-        className="h-48 bg-cover bg-center bg-primary/10 flex items-center justify-center"
-        style={project.image_url ? { backgroundImage: `url('${project.image_url}')` } : undefined}
-      >
-        {!project.image_url && (
-          <span className="material-symbols-outlined text-primary/30 text-5xl">{project.icon}</span>
-        )}
-      </div>
-      <div className="p-6 flex-1 flex flex-col">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="material-symbols-outlined text-primary text-2xl">{project.icon}</span>
-          <h3 className="text-lg font-semibold">{project.title}</h3>
+  return (
+    <Link href={`/projects/${project.id}`} className="block h-full">
+      <div className="group overflow-hidden rounded-3xl border border-outline-variant/30 soft-shadow hover-lift bg-white h-full flex flex-col">
+        <div
+          className="h-48 bg-cover bg-center bg-primary/10 flex items-center justify-center"
+          style={project.image_url ? { backgroundImage: `url('${project.image_url}')` } : undefined}
+        >
+          {!project.image_url && (
+            <span className="material-symbols-outlined text-primary/30 text-5xl">{project.icon}</span>
+          )}
         </div>
-        {project.category && (
-          <div className="bg-primary/10 text-primary px-3 py-1 rounded-full inline-block text-xs font-bold uppercase tracking-wide mb-3 w-fit">
-            {project.category}
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="material-symbols-outlined text-primary text-2xl">{project.icon}</span>
+            <h3 className="text-lg font-semibold">{project.title}</h3>
           </div>
-        )}
-        <p className="text-on-surface-variant text-sm flex-1">{project.description}</p>
-        {project.link_url && (
+          {project.category && (
+            <div className="bg-primary/10 text-primary px-3 py-1 rounded-full inline-block text-xs font-bold uppercase tracking-wide mb-3 w-fit">
+              {project.category}
+            </div>
+          )}
+          <p className="text-on-surface-variant text-sm flex-1">{project.description}</p>
           <span className="mt-4 inline-flex items-center gap-2 text-primary font-bold text-sm w-fit">
             View project
             <span className="material-symbols-outlined text-base transition-transform group-hover:translate-x-1">
               arrow_right_alt
             </span>
           </span>
-        )}
+        </div>
       </div>
-    </div>
+    </Link>
   );
-
-  if (project.link_url) {
-    return (
-      <a href={project.link_url} target="_blank" rel="noopener noreferrer" className="block h-full">
-        {inner}
-      </a>
-    );
-  }
-  return inner;
 }
 
 export default function ProjectsSection({ projects }: { projects: Project[] }) {

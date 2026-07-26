@@ -1,5 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
-import type { Profile, SocialLink, SkillGroup, Experience, Project } from "@/lib/types";
+import type {
+  Profile,
+  SocialLink,
+  SkillGroup,
+  Experience,
+  Project,
+  ProjectWithDetails,
+  Education,
+  Certification,
+} from "@/lib/types";
 
 export async function getProfile(): Promise<Profile> {
   const supabase = await createClient();
@@ -36,4 +45,32 @@ export async function getProjects(): Promise<Project[]> {
   const supabase = await createClient();
   const { data } = await supabase.from("projects").select("*").order("sort_order");
   return (data ?? []) as Project[];
+}
+
+export async function getProjectById(id: string): Promise<ProjectWithDetails | null> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("projects")
+    .select("*, project_media(*), project_links(*)")
+    .eq("id", id)
+    .single();
+  if (!data) return null;
+  const project = data as ProjectWithDetails;
+  return {
+    ...project,
+    project_media: (project.project_media ?? []).slice().sort((a, b) => a.sort_order - b.sort_order),
+    project_links: (project.project_links ?? []).slice().sort((a, b) => a.sort_order - b.sort_order),
+  };
+}
+
+export async function getEducation(): Promise<Education[]> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("education").select("*").order("sort_order");
+  return (data ?? []) as Education[];
+}
+
+export async function getCertifications(): Promise<Certification[]> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("certifications").select("*").order("sort_order");
+  return (data ?? []) as Certification[];
 }

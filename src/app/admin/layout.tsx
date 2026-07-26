@@ -7,6 +7,8 @@ const navItems = [
   { href: "/admin/social-links", label: "Social Links", icon: "share" },
   { href: "/admin/skills", label: "Skills", icon: "code_blocks" },
   { href: "/admin/experience", label: "Experience", icon: "work_history" },
+  { href: "/admin/education", label: "Education", icon: "school" },
+  { href: "/admin/certifications", label: "Certifications", icon: "workspace_premium" },
   { href: "/admin/projects", label: "Projects", icon: "dashboard_customize" },
 ];
 

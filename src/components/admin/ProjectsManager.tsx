@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { uploadAsset } from "@/lib/upload";
 import type { Project } from "@/lib/types";
@@ -112,12 +113,20 @@ export default function ProjectsManager({ initialProjects }: { initialProjects: 
       {projects.map((project) => (
         <div key={project.id} className="bg-white rounded-2xl border border-outline-variant/30 p-6 space-y-3">
           <ProjectFields value={project} onChange={(patch) => updateProject(project.id, patch)} />
-          <button
-            onClick={() => removeProject(project.id)}
-            className="text-error text-sm font-semibold hover:bg-error/10 rounded-lg px-3 py-1"
-          >
-            Remove
-          </button>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/admin/projects/${project.id}`}
+              className="text-primary text-sm font-semibold hover:bg-primary/10 rounded-lg px-3 py-1"
+            >
+              Manage gallery, video &amp; links →
+            </Link>
+            <button
+              onClick={() => removeProject(project.id)}
+              className="text-error text-sm font-semibold hover:bg-error/10 rounded-lg px-3 py-1"
+            >
+              Remove
+            </button>
+          </div>
         </div>
       ))}
 
