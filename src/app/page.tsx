@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import CursorGlow from "@/components/CursorGlow";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import ExperienceSection from "@/components/ExperienceSection";
@@ -22,6 +23,7 @@ export default async function Home() {
 
   return (
     <>
+      <CursorGlow />
       <Nav profile={profile} />
       <main className="mt-20 flex-1">
         <Hero profile={profile} badges={skillGroups.slice(0, 3).map((g) => ({ icon: g.icon, title: g.title }))} />
