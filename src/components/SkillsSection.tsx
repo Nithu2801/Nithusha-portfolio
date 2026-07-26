@@ -1,45 +1,6 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import type { SkillGroup } from "@/lib/types";
 
-function SkillBar({ name, level, animate }: { name: string; level: number; animate: boolean }) {
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-sm font-semibold text-on-surface">{name}</span>
-        <span className="text-xs font-bold text-primary">{level}%</span>
-      </div>
-      <div className="h-2 w-full rounded-full bg-surface-container overflow-hidden">
-        <div
-          className="h-full rounded-full bg-vibrant-gradient transition-all duration-1000 ease-out"
-          style={{ width: animate ? `${level}%` : "0%" }}
-        />
-      </div>
-    </div>
-  );
-}
-
 export default function SkillsSection({ groups }: { groups: SkillGroup[] }) {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section className="py-section-padding px-margin-x bg-surface-container-low" id="skills">
       <div className="max-w-[1280px] mx-auto">
@@ -51,7 +12,7 @@ export default function SkillsSection({ groups }: { groups: SkillGroup[] }) {
               A deep-rooted understanding of modern development paradigms and high-performance technologies.
             </p>
           </div>
-          <div ref={ref} className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-stack-md">
             {groups.map((group, i) => (
               <div
                 key={group.id}
@@ -69,9 +30,14 @@ export default function SkillsSection({ groups }: { groups: SkillGroup[] }) {
                   </span>
                 </div>
                 <h3 className="text-xl font-semibold">{group.title}</h3>
-                <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
                   {group.skill_items.map((item) => (
-                    <SkillBar key={item.id} name={item.name} level={item.level} animate={visible} />
+                    <span
+                      key={item.id}
+                      className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-lg text-sm font-medium"
+                    >
+                      {item.name}
+                    </span>
                   ))}
                 </div>
               </div>
