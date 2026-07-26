@@ -9,14 +9,14 @@ export default function SkillsSection({ groups }: { groups: SkillGroup[] }) {
           <p className="text-primary text-sm font-bold tracking-widest uppercase">My Skills</p>
           <h2 className="text-3xl md:text-4xl font-bold">Technical Arsenal</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter items-stretch">
           {groups.map((group) => (
-            <div key={group.id} className="bg-white rounded-2xl border border-outline-variant/30 p-6">
+            <div key={group.id} className="bg-white rounded-2xl border border-outline-variant/30 p-6 flex flex-col">
               <div className="flex items-center gap-2 pb-4 mb-4 border-b border-outline-variant/20">
                 <span className="material-symbols-outlined text-primary text-xl">{group.icon}</span>
                 <h3 className="text-lg font-bold">{group.title}</h3>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {group.skill_items.map((item) => (
                   <div
                     key={item.id}

@@ -51,18 +51,9 @@ function ProjectFields({
         onChange={(e) => onChange({ description: e.target.value })}
         placeholder="Description"
       />
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <input className="input" value={value.icon} onChange={(e) => onChange({ icon: e.target.value })} placeholder="Icon (Material Symbols name)" />
         <input className="input" value={value.link_url ?? ""} onChange={(e) => onChange({ link_url: e.target.value })} placeholder="Link URL (optional)" />
-        <select
-          className="input"
-          value={value.layout_size}
-          onChange={(e) => onChange({ layout_size: e.target.value as Project["layout_size"] })}
-        >
-          <option value="large">Large (featured)</option>
-          <option value="medium">Medium</option>
-          <option value="small">Small</option>
-        </select>
       </div>
       <div className="flex items-center gap-4">
         {value.image_url && (
