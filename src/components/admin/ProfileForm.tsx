@@ -13,6 +13,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     title: profile?.title ?? "",
     tagline: profile?.tagline ?? "",
     bio: profile?.bio ?? "",
+    about_text: profile?.about_text ?? "",
     location: profile?.location ?? "",
     email: profile?.email ?? "",
     phone: profile?.phone ?? "",
@@ -78,8 +79,16 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         <input className="input" value={form.tagline} onChange={(e) => update("tagline", e.target.value)} />
       </Field>
 
-      <Field label="Bio / about">
+      <Field label="Bio (short summary shown in the hero section)">
         <textarea className="input min-h-28" value={form.bio} onChange={(e) => update("bio", e.target.value)} />
+      </Field>
+
+      <Field label="About Me (personal paragraph shown in the About section)">
+        <textarea
+          className="input min-h-28"
+          value={form.about_text}
+          onChange={(e) => update("about_text", e.target.value)}
+        />
       </Field>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

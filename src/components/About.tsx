@@ -6,12 +6,12 @@ export default function About({ profile }: { profile: Profile }) {
       <div className="max-w-[1280px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-stack-md">
-            <p className="text-primary text-sm font-bold tracking-widest uppercase">Professional Background</p>
+            <p className="text-primary text-sm font-bold tracking-widest uppercase">A Bit About Me</p>
             <h2 className="text-3xl md:text-4xl font-bold">
-              Developer based in {profile?.location || "..."}.
+              Based in {profile?.location || "..."}, building software that solves real problems.
             </h2>
             <div className="space-y-stack-md text-lg text-on-surface-variant leading-relaxed">
-              <p>{profile?.bio}</p>
+              <p>{profile?.about_text || profile?.bio}</p>
             </div>
             <div className="grid grid-cols-2 gap-stack-lg pt-stack-md">
               <div className="p-stack-md bg-surface rounded-xl border border-outline-variant/30">
