@@ -74,7 +74,7 @@ function TechBadge({
 
 export default function Hero({ profile, badges }: { profile: Profile; badges: Pick<SkillGroup, "icon" | "title">[] }) {
   return (
-    <section className="min-h-[80vh] flex flex-col justify-center relative overflow-hidden px-margin-x py-section-padding">
+    <section className="md:min-h-[80vh] flex flex-col justify-center relative overflow-hidden px-margin-x py-10 md:py-section-padding">
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
         <div className="lg:col-span-7 space-y-stack-lg">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold tracking-wide">
