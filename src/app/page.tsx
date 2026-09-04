@@ -8,8 +8,10 @@ import CertificationsSection from "@/components/CertificationsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactCta from "@/components/ContactCta";
+import FaqSection from "@/components/FaqSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PersonJsonLd from "@/components/PersonJsonLd";
 import {
   getProfile,
   getSocialLinks,
@@ -35,6 +37,7 @@ export default async function Home() {
 
   return (
     <>
+      <PersonJsonLd profile={profile} socialLinks={socialLinks} skillGroups={skillGroups} education={education} />
       <CursorGlow />
       <Nav profile={profile} />
       <main className="mt-20 flex-1">
@@ -54,6 +57,7 @@ export default async function Home() {
         <CertificationsSection certifications={certifications} />
         <ProjectsSection projects={projects} />
         <SkillsSection groups={skillGroups} />
+        <FaqSection profile={profile} skillGroups={skillGroups} />
         <ContactCta profile={profile} />
       </main>
       <Footer profile={profile} socialLinks={socialLinks} />

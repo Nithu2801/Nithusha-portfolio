@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import { getProfile } from "@/lib/data";
+import { getProfile, getSkillGroups } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
@@ -10,10 +11,45 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const profile = await getProfile();
+  const [profile, skillGroups] = await Promise.all([getProfile(), getSkillGroups()]);
+  const title = `${profile?.name || "Portfolio"} | ${profile?.title || "Full Stack Developer"}`;
+  const description =
+    profile?.bio ||
+    profile?.tagline ||
+    `${profile?.name || "Full stack developer"} — ${profile?.title || "Full Stack Developer"} based in ${
+      profile?.location || "Sri Lanka"
+    }.`;
+  const keywords = [
+    profile?.name,
+    profile?.title,
+    "Full Stack Developer",
+    "Web Developer",
+    profile?.location,
+    ...skillGroups.flatMap((g) => g.skill_items.map((s) => s.name)),
+  ].filter(Boolean) as string[];
+
   return {
-    title: `${profile?.name || "Portfolio"} | ${profile?.title || "Full Stack Developer"}`,
-    description: profile?.tagline || profile?.bio || "",
+    metadataBase: new URL(SITE_URL),
+    title: { default: title, template: `%s | ${profile?.name || "Portfolio"}` },
+    description,
+    keywords,
+    authors: profile?.name ? [{ name: profile.name, url: SITE_URL }] : undefined,
+    creator: profile?.name,
+    alternates: { canonical: "/" },
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: "website",
+      url: SITE_URL,
+      siteName: `${profile?.name || "Portfolio"}`,
+      title,
+      description,
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

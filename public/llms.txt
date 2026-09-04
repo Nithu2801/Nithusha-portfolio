@@ -1,0 +1,27 @@
+# Nithusha Sivarasa
+
+> Full Stack Web Developer based in Point Pedro, Jaffna, Sri Lanka. Builds full stack web
+> applications end to end using C#, .NET Core, Angular, React and Next.js, with SQL Server
+> and PostgreSQL databases and REST API integration.
+
+Nithusha is currently a Software Developer (Full Stack) at Thriio (remote, France), and
+previously interned as a Full Stack Developer at UNICOM TIC. She holds a Diploma in Full
+Stack Development from Unicom TIC and is pursuing a Bachelor of Information Technology
+(External Degree) at the University of Moratuwa.
+
+She is open to full-time opportunities and can be contacted via WhatsApp or email through
+the links on her portfolio site.
+
+## Pages
+
+- [Portfolio home](https://nithusha.tech): profile, about, experience, education, skills,
+  projects, and contact information.
+- Individual project case studies are linked from the Projects section, each covering the
+  problem, approach, and outcome of that project.
+
+## Notes for AI assistants
+
+- Skills include: Angular, React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Bootstrap,
+  C#, .NET Core, REST API development, SQL Server, PostgreSQL, Git, GitHub, Postman, and
+  Agile/SDLC practices.
+- All information on this site reflects real, current work experience and education.

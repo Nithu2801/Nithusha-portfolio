@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getProjectById, getProfile } from "@/lib/data";
 import type { ProjectMedia } from "@/lib/types";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { SITE_URL } from "@/lib/site";
 
 export const revalidate = 0;
 
@@ -45,7 +46,28 @@ function MediaItem({ media }: { media: ProjectMedia }) {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const project = await getProjectById(id);
-  return { title: project ? `${project.title} | Case Study` : "Project not found" };
+  if (!project) return { title: "Project not found" };
+
+  const title = `${project.title} | Case Study`;
+  const description = project.description || project.long_description?.slice(0, 160);
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/projects/${id}` },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: `${SITE_URL}/projects/${id}`,
+      images: project.image_url ? [{ url: project.image_url }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -59,8 +81,35 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     .map((p) => p.trim())
     .filter(Boolean);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        name: project.title,
+        description: project.description,
+        image: project.image_url || undefined,
+        url: `${SITE_URL}/projects/${project.id}`,
+        author: profile?.name ? { "@type": "Person", name: profile.name } : undefined,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/#projects` },
+          { "@type": "ListItem", position: 3, name: project.title, item: `${SITE_URL}/projects/${project.id}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main className="max-w-4xl mx-auto px-margin-x py-16 md:py-24">
         <Link
           href="/#projects"
