@@ -115,14 +115,18 @@ body {
   animation: wa-pulse 2.5s infinite;
 }
 
-.input {
-  width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-outline-variant);
-  padding: 0.5rem 1rem;
-  background: white;
-}
-.input:focus {
-  outline: none;
-  border-color: var(--color-primary);
+/* Layered as "components" so Tailwind utilities (e.g. sm:w-32, flex-1) always
+   win when combined with .input, regardless of source order in this file. */
+@layer components {
+  .input {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-outline-variant);
+    padding: 0.5rem 1rem;
+    background: white;
+  }
+  .input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
 }

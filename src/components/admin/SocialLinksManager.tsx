@@ -50,7 +50,7 @@ export default function SocialLinksManager({ initialLinks }: { initialLinks: Soc
               placeholder="Platform"
             />
             <input
-              className="input flex-1"
+              className="input flex-1 min-w-0"
               value={link.url}
               onChange={(e) => updateLink(link.id, { url: e.target.value })}
               placeholder="URL"
@@ -80,7 +80,7 @@ export default function SocialLinksManager({ initialLinks }: { initialLinks: Soc
           placeholder="Platform (e.g. GitHub)"
         />
         <input
-          className="input flex-1"
+          className="input flex-1 min-w-0"
           value={draft.url}
           onChange={(e) => setDraft((d) => ({ ...d, url: e.target.value }))}
           placeholder="https://github.com/you"

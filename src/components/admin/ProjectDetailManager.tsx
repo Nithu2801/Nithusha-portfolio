@@ -200,7 +200,7 @@ export default function ProjectDetailManager({ project }: { project: ProjectWith
             placeholder="Label (e.g. GitHub Repo)"
           />
           <input
-            className="input flex-1"
+            className="input flex-1 min-w-0"
             value={linkDraft.url}
             onChange={(e) => setLinkDraft((d) => ({ ...d, url: e.target.value }))}
             placeholder="https://..."
